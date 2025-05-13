@@ -5,6 +5,7 @@
     <div>
       <label>Name:</label>
       <input v-model="form.name" type="text" required />
+      <span v-if="errors.name" class="error">{{ errors.name }}</span>
     </div>
 
     <div>
@@ -14,6 +15,7 @@
         required
         placeholder="Your favorite music band + a few words explaining why you chose them."
       />
+      <span v-if="errors.band" class="error">{{ errors.band }}</span>
     </div>
 
     <div>
@@ -49,12 +51,19 @@ const props = defineProps({
   initialData: Object,
 });
 const emit = defineEmits(["submit-form"]);
+const nameRegex = /^[a-zA-Z\s]+$/; // Only letters and spaces
+const bandRegex = /^[a-zA-Z\s.,!?'"-]+$/; // Letters + basic punctuation (no numbers or symbols)
 
 const form = reactive({
   name: "",
   band: "",
   year: "",
   apiKey: "",
+});
+
+const errors = reactive({
+  name: "",
+  band: "",
 });
 
 const years = [];
@@ -75,7 +84,32 @@ watch(
   { immediate: true }
 );
 
+// Simple regex: allow only letters, numbers, spaces
+const noSpecialCharsRegex = /^[a-zA-Z0-9\s]+$/;
+
 function handleSubmit() {
+  errors.name = "";
+  errors.band = "";
+
+  let isValid = true;
+
+  if (!form.name || !nameRegex.test(form.name)) {
+    errors.name = "Name must contain only letters and spaces.";
+    isValid = false;
+  }
+
+  if (!form.band || !bandRegex.test(form.band)) {
+    errors.band =
+      "Band description must contain only letters and allowed punctuation (no numbers or special symbols).";
+    isValid = false;
+  }
+
+  if (!form.year) {
+    isValid = false;
+  }
+
+  if (!isValid) return;
+
   emit("submit-form", { ...form });
 }
 </script>
@@ -139,5 +173,10 @@ function handleSubmit() {
 
 .band-form button:hover {
   background-color: #45a049;
+}
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
 }
 </style>
