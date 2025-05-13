@@ -33,7 +33,7 @@
         type="password"
         placeholder="Enter your LLM API Key (optional)"
       />
-      <div v-if="!form.apiKey" style="color: orange; font-size: 0.9rem">
+      <div v-if="!form.apiKey" style="color: red; font-size: 0.9rem">
         Generative features (text & image) will be skipped without an API key.
       </div>
     </div>
@@ -76,11 +76,6 @@ watch(
 );
 
 function handleSubmit() {
-  if (!form.apiKey) {
-    alert(
-      "Note: You didn't provide an API key. Generative features will be skipped."
-    );
-  }
   emit("submit-form", { ...form });
 }
 </script>
