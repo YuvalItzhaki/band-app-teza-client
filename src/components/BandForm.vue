@@ -48,7 +48,6 @@ import { reactive, watch } from "vue";
 const props = defineProps({
   initialData: Object,
 });
-
 const emit = defineEmits(["submit-form"]);
 
 const form = reactive({
@@ -70,6 +69,7 @@ watch(
       form.name = data.name || "";
       form.band = data.band || "";
       form.year = data.year || "";
+      form.apiKey = data.apiKey || "";
     }
   },
   { immediate: true }
@@ -90,7 +90,8 @@ function handleSubmit() {
 }
 
 .band-form {
-  max-width: 600px;
+  width: 600px;
+  max-width: 100%;
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 12px;
@@ -100,6 +101,7 @@ function handleSubmit() {
   flex-direction: column;
   gap: 1.5rem;
   font-family: Arial, sans-serif;
+  overflow: hidden;
 }
 
 .band-form div {

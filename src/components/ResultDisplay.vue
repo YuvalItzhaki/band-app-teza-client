@@ -15,9 +15,14 @@
     <div class="stats">
       <h3>Statistics</h3>
       <ul>
-        <li>Capitalized Words: {{ result.stats?.capitalWords }}</li>
-        <li>Words Followed by Numbers: {{ result.stats?.wordsWithNumbers }}</li>
-        <li>Year is: {{ result.isEven ? "Even" : "Odd" }}</li>
+        <li>
+          <strong>Capitalized Words:</strong> {{ result.stats?.capitalWords }}
+        </li>
+        <li>
+          <strong>Words with Numbers:</strong>
+          {{ result.stats?.wordsWithNumbers }}
+        </li>
+        <li><strong>Year is:</strong> {{ result.isEven ? "Even" : "Odd" }}</li>
       </ul>
     </div>
   </div>
@@ -30,53 +35,6 @@ defineProps({
 </script>
 
 <style scoped>
-.band-form {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  border-radius: 12px;
-  background-color: #f9f9f9;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  font-family: Arial, sans-serif;
-}
-
-.band-form div {
-  display: flex;
-  flex-direction: column;
-}
-
-.band-form label {
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.band-form input,
-.band-form textarea,
-.band-form select {
-  padding: 0.75rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-  resize: vertical;
-}
-
-.band-form button {
-  padding: 0.75rem;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.band-form button:hover {
-  background-color: #45a049;
-}
 .result-display {
   max-width: 800px;
   margin: 2rem auto;
@@ -85,7 +43,8 @@ defineProps({
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   font-family: Arial, sans-serif;
-  color: #222; /* <-- improve base text color */
+  color: #222;
+  text-align: center;
 }
 
 .result-display h2 {
@@ -93,29 +52,56 @@ defineProps({
   font-weight: bold;
   color: #222;
   margin-bottom: 1.5rem;
-  text-align: center;
 }
 
 .result-display h3 {
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
-  margin-top: 1.2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .result-display p {
   font-size: 1.1rem;
   color: #333;
   line-height: 1.6;
+  text-align: left;
+}
+
+.generated-img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Stats Section Styling */
+.stats {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.stats ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .stats li {
   font-size: 1.1rem;
-  margin-bottom: 0.5rem;
   color: #444;
+  padding: 0.4rem 0;
+  display: flex;
+  justify-content: space-between;
+  max-width: 400px;
+  margin: 0 auto;
+  border-bottom: 1px solid #eee;
 }
 
 .stats li:last-child {
+  border-bottom: none;
   font-weight: bold;
   color: #1e88e5;
 }
