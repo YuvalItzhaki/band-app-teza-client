@@ -13,7 +13,9 @@ const latestSubmission = ref(null);
 // Fetch the latest submission from the server
 onMounted(async () => {
   try {
-    const res = await axios.get("http://localhost:5001/api/latest");
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/api/latest`
+    );
     latestSubmission.value = res.data;
     // Set submission result on page load if data is available
     if (latestSubmission.value) {
@@ -31,7 +33,10 @@ async function handleSubmit(formData) {
   submissionResult.value = null;
 
   try {
-    const res = await axios.post("http://localhost:5001/api/submit", formData);
+    const res = await axios.post(
+      `${import.meta.env.VITE_API_BASE_URL}/api/submit`,
+      formData
+    );
     submissionResult.value = res.data;
     // Store the latest data in local storage to persist data across refreshes
     localStorage.setItem("bandSubmission", JSON.stringify(formData));

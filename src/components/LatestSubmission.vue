@@ -17,7 +17,9 @@ const latest = ref(null);
 
 onMounted(async () => {
   try {
-    const res = await axios.get("http://localhost:5001/api/latest");
+    const res = await axios.get(
+      `${import.meta.env.VITE_API_BASE_URL}/api/latest`
+    );
     latest.value = res.data;
   } catch (err) {
     console.error("Failed to fetch latest submission:", err);
